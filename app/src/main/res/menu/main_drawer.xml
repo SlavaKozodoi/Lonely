@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+
+    >
+
+    <group >
+        <item
+            android:title="@string/Title_today"
+            android:id="@+id/Today"/>
+
+
+        <item
+            android:title="@string/Title_this_week"
+            android:id="@+id/This_week"/>
+
+        <item
+            android:title="@string/Title_this_mounts"
+            android:id="@+id/This_mounts"/>
+
+        <item
+            android:title="@string/All_entries"
+            android:id="@+id/All_entries"/>
+
+        <item
+            android:title="@string/Earning"
+            android:id="@+id/Earning"/>
+
+        <item
+            android:title="@string/Setings"
+            android:id="@+id/Setings"/>
+
+        <item
+            android:title="@string/New_entries"
+            android:id="@+id/New_entries"
+
+            />
+    </group>
+</menu>
