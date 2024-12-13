@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <include
+        android:id="@+id/action_bar"
         layout="@layout/action_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -25,11 +26,5 @@
 
 
     </com.google.android.material.navigation.NavigationView>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </FrameLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

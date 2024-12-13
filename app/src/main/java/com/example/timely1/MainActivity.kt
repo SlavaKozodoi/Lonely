@@ -35,7 +35,12 @@ class MainActivity : AppCompatActivity() {
         conf = AppBarConfiguration(
             setOf(
                 R.id.Today,
-                R.id.This_week
+                R.id.This_week,
+                R.id.This_mounts,
+                R.id.All_entries,
+                R.id.Earning,
+                R.id.Setings,
+                R.id.New_entries
             ),binding.drawer
         )
         setupActionBarWithNavController(navControler,conf)

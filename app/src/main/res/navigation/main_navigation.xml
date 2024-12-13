@@ -3,16 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/today">
+    app:startDestination="@id/Today">
 
     <fragment
-        android:id="@+id/today"
+        android:id="@+id/Today"
         android:name="com.example.timely1.Today"
         android:label="fragment_today"
         tools:layout="@layout/fragment_today" />
     <fragment
-        android:id="@+id/this_week"
+        android:id="@+id/This_week"
         android:name="com.example.timely1.This_week"
         android:label="fragment_this_week"
         tools:layout="@layout/fragment_this_week" />
+    <fragment
+        android:id="@+id/All_entries"
+        android:name="com.example.timely1.All_entries"
+        android:label="fragment_all_entries"
+        tools:layout="@layout/fragment_all_entries" />
+    <fragment
+        android:id="@+id/Earning"
+        android:name="com.example.timely1.Earning"
+        android:label="fragment_earning"
+        tools:layout="@layout/fragment_earning" />
+    <fragment
+        android:id="@+id/New_entries"
+        android:name="com.example.timely1.New_entries"
+        android:label="fragment_new_entries"
+        tools:layout="@layout/fragment_new_entries" />
+    <fragment
+        android:id="@+id/Setings"
+        android:name="com.example.timely1.Setings"
+        android:label="fragment_setings"
+        tools:layout="@layout/fragment_setings" />
+    <fragment
+        android:id="@+id/This_mounts"
+        android:name="com.example.timely1.This_mounts"
+        android:label="fragment_this_mounts"
+        tools:layout="@layout/fragment_this_mounts" />
 </navigation>
