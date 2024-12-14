@@ -8,20 +8,31 @@
     <string name="Earning">Заробіток</string>
     <string name="Setings">Налаштування</string>
     <string name="New_entries">Новий запис</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
 
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+<!-- NEW ENTRIES   -->
+    <string name="client_name">Ім\'я</string>
+    <string name="client_secondname">Призвище</string>
+    <string name="client_thirdname">Побатькові</string>
+    <string name="client_number">Номер телефону</string>
+    <string name="client_dateof">Дата прийому</string>
+    <string name="client_dateof_hint">дд/мм/рррр</string>
+    <string name="client_timeof">Час прийому</string>
+    <string name="client_timeof_hint">00:00</string>
+    <string name="client_price">Ціна</string>
+    <string name="client_price_hint">0</string>
+    <string name="client_additional">Побажання або додаткова інформація</string>
+    <string name="client_btn">Додати запис</string>
+    <string name="client_emty"> </string>
+<!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+<!--CLIENT ITEM ENTRY-->
+    <string name="price_text">Ціна: </string>
+    <string name="time_text">Час прийому: </string>
+<!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+<!--ALL ENTRIES-->
+    <string name="all_entries">Всі записи </string>
+<!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+<!--ALL ENTRIES-->
+    <string name="today_entries">Записи на сьогодні </string>
+<!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
 </resources>

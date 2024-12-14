@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="Drawer_main_color">#B64654</color>
+    <color name="items_main_color">#D45B6A</color>
+
 </resources>
