@@ -3,6 +3,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timely1.R
 import com.example.timely1.models.Entry
@@ -62,10 +63,10 @@ class EntriesGroupedAdapter(
         private val clientName: TextView = itemView.findViewById(R.id.client_fullname_textView)
         private val clientTime: TextView = itemView.findViewById(R.id.client_time_textView)
         private val clientPrice: TextView = itemView.findViewById(R.id.client_price_textView)
-        private val buttonInfo: Button = itemView.findViewById(R.id.button_dop_info)
+        private val buttonInfo: CardView = itemView.findViewById(R.id.cardView)
 
         fun bind(entry: Entry, onInfoClick: (Entry) -> Unit) {
-            clientName.text = "${entry.name} ${entry.secondName} ${entry.thirdName}"
+            clientName.text = "${entry.name} ${entry.secondName}"
             clientTime.text = entry.time
             clientPrice.text = "${entry.price} грн"
 

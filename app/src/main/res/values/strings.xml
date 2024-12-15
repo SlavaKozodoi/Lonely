@@ -29,10 +29,11 @@
     <string name="price_text">Ціна: </string>
     <string name="time_text">Час прийому: </string>
 <!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
-<!--ALL ENTRIES-->
+<!--ALL TITLE FRAGMENT-->
     <string name="all_entries">Всі записи </string>
-<!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
-<!--ALL ENTRIES-->
     <string name="today_entries">Записи на сьогодні </string>
+    <string name="week_entries">Записи на неділю </string>
+    <string name="mounts_entries">Записи на місяць </string>
 <!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+
 </resources>

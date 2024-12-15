@@ -16,7 +16,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/material_dynamic_neutral20"
+            android:background="@color/Drawer_main_color"
             android:backgroundTint="#A64646"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"

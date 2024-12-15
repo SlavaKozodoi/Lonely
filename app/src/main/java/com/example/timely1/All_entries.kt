@@ -43,43 +43,22 @@ class All_entries : Fragment() {
             )
         }
 
-        Log.d("DatabaseDebug", "Получено записей: ${entries.size}")
 
-        // Текущая дата
-        val currentDate = LocalDate.now()
         val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
 
-        // Фильтруем записи, начиная с текущего дня
-        val filteredEntries = entries.filter {
-            val entryDate = LocalDate.parse(it.date, formatter) // Парсим дату
-            entryDate >= currentDate // Сравниваем с текущей датой
-        }
-
-        // Логируем количество записей после фильтрации
-        Log.d("DatabaseDebug", "Отфильтровано записей: ${filteredEntries.size}")
-
-        // Группируем записи по дате
-        val groupedEntries = filteredEntries.groupBy { it.date }
-
-        // Логируем сгруппированные записи
-        Log.d("DatabaseDebug", "Группировка по дате: $groupedEntries")
+        val groupedEntries = entries.groupBy { it.date }
 
         val listItems = mutableListOf<Any>()
 
         // Сортируем по дате
         groupedEntries.toSortedMap(compareBy { LocalDate.parse(it, formatter) }).forEach { (date, entriesForDate) ->
-            listItems.add(date) // Добавляем дату как заголовок
-            // Сортируем записи по времени (предполагается, что time — это строка в формате "HH:mm")
+            listItems.add(date)
             val sortedEntries = entriesForDate.sortedBy { it.time }
-            listItems.addAll(sortedEntries) // Добавляем отсортированные записи этой даты
+            listItems.addAll(sortedEntries)
         }
 
-        // Логируем итоговый список
-        Log.d("DatabaseDebug", "Формированный список элементов: $listItems")
 
-        // Устанавливаем адаптер для RecyclerView
         val adapter = EntriesGroupedAdapter(listItems) { entry ->
-            // Обработка клика по записи
             android.widget.Toast.makeText(
                 context,
                 "Доп. информация для ${entry.name} ${entry.id}",
