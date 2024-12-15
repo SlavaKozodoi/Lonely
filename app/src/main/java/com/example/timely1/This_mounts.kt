@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.navigation.fragment.findNavController
@@ -85,14 +86,20 @@ class This_mounts : Fragment() {
         }
 
         // Создаем адаптер и связываем с RecyclerView
-        val adapter = EntriesGroupedAdapter(listItems) { entry ->
-            // Обработка клика на записи
-            android.widget.Toast.makeText(
-                context,
-                "Доп. информация для ${entry.name} ${entry.id}",
-                android.widget.Toast.LENGTH_SHORT
-            ).show()
-        }
+        val adapter = EntriesGroupedAdapter(
+            items = listItems,
+            context = requireContext(),
+            onDelete = { entry ->
+
+                // Логика удаления клиента
+                Toast.makeText(requireContext(), "Удалён: ${entry.name}", Toast.LENGTH_SHORT).show()
+            },
+            onUpdate = { entry ->
+                // Логика обновления клиента
+                Toast.makeText(requireContext(), "Обновление: ${entry.name}", Toast.LENGTH_SHORT).show()
+            }
+        )
+
 
         itemsRecycler.layoutManager = LinearLayoutManager(requireContext())
         itemsRecycler.adapter = adapter

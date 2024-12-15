@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -58,13 +59,21 @@ class All_entries : Fragment() {
         }
 
 
-        val adapter = EntriesGroupedAdapter(listItems) { entry ->
-            android.widget.Toast.makeText(
-                context,
-                "Доп. информация для ${entry.name} ${entry.id}",
-                android.widget.Toast.LENGTH_SHORT
-            ).show()
-        }
+        val adapter = EntriesGroupedAdapter(
+            items = listItems,
+            context = requireContext(),
+            onDelete = { entry ->
+                // Логика удаления клиента
+                Toast.makeText(requireContext(), "Удалён: ${entry.name}", Toast.LENGTH_SHORT).show()
+            },
+            onUpdate = { entry ->
+                // Логика обновления клиента
+                Toast.makeText(requireContext(), "Обновление: ${entry.name}", Toast.LENGTH_SHORT).show()
+            }
+        )
+
+
+
 
         itemsRecycler.layoutManager = LinearLayoutManager(requireContext())
         itemsRecycler.adapter = adapter

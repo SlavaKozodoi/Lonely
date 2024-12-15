@@ -13,15 +13,15 @@ import com.example.timely1.DataBase.DataBase
 
 class New_entries : Fragment() {
 
+    private var entryId: Long = -1
+    private lateinit var db: DataBase
+
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         val view = inflater.inflate(R.layout.fragment_new_entries, container, false)
-
 
         val editTextName: EditText = view.findViewById(R.id.editTextName)
         val editTextSecondName: EditText = view.findViewById(R.id.editTextSecondName)
@@ -31,13 +31,33 @@ class New_entries : Fragment() {
         val editTextTime: EditText = view.findViewById(R.id.editTextTime)
         val editTextPrice: EditText = view.findViewById(R.id.editTextPrice)
         val editTextTextAdditional: EditText = view.findViewById(R.id.editTextTextAdditional)
-        val button: Button = view.findViewById(R.id.Add_btn)
+        val buttonAdd: Button = view.findViewById(R.id.Add_btn)
+        val buttonDel: Button = view.findViewById(R.id.button_del)
 
+        db = DataBase(requireContext())
 
-        val db = DataBase(requireContext())
+        // Проверяем наличие переданного ID из Bundle
+        arguments?.let {
+            entryId = it.getLong("entry_id", -1)
+            if (entryId != -1L) {
+                val entry = db.getEntryById(entryId)
+                entry?.let {
+                    editTextName.setText(entry.name)
+                    editTextSecondName.setText(entry.secondName)
+                    editTextThirdName.setText(entry.thirdName)
+                    editTextPhone.setText(entry.number.toString())
+                    editTextDate.setText(entry.date)
+                    editTextTime.setText(entry.time)
+                    editTextPrice.setText(entry.price.toString())
+                    editTextTextAdditional.setText(entry.additional)
+                    buttonAdd.text = "Обновить"
+                }
+            }
+        }
 
-        button.setOnClickListener {
-            try {
+        buttonAdd.setOnClickListener {
+            if (entryId == -1L) {
+                // Добавление новой записи
                 db.insertData(
                     editTextName.text.toString(),
                     editTextSecondName.text.toString(),
@@ -49,32 +69,34 @@ class New_entries : Fragment() {
                     editTextTextAdditional.text.toString()
                 )
                 Toast.makeText(requireContext(), "Добавлено!", Toast.LENGTH_SHORT).show()
-
-                editTextName.text.clear()
-                editTextSecondName.text.clear()
-                editTextThirdName.text.clear()
-                editTextPhone.text.clear()
-                editTextDate.text.clear()
-                editTextTime.text.clear()
-                editTextPrice.text.clear()
-                editTextTextAdditional.text.clear()
-            } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Ошибка: ${e.message}", Toast.LENGTH_SHORT).show()
+            } else {
+                // Обновление существующей записи
+                db.updateData(
+                    entryId,
+                    editTextName.text.toString(),
+                    editTextSecondName.text.toString(),
+                    editTextThirdName.text.toString(),
+                    editTextPhone.text.toString().toLong(),
+                    editTextDate.text.toString(),
+                    editTextTime.text.toString(),
+                    editTextPrice.text.toString().toDouble(),
+                    editTextTextAdditional.text.toString()
+                )
+                Toast.makeText(requireContext(), "Обновлено!", Toast.LENGTH_SHORT).show()
             }
+
+            // После сохранения данных закрываем фрагмент
+            requireActivity().supportFragmentManager.popBackStack()
         }
 
-        val entries = db.getAllEntries()
-
-        if (entries.isNotEmpty()) {
-            for (entry in entries) {
-                android.util.Log.d("DatabaseEntry", "Запись: $entry")
-            }
-        } else {
-            android.util.Log.d("DatabaseEntry", "База данных пуста!")
+        buttonDel.setOnClickListener{
+            db.deleteData(entryId.toInt())
+            Toast.makeText(requireContext(), "Видалено!", Toast.LENGTH_SHORT).show()
+            requireActivity().supportFragmentManager.popBackStack()
         }
-
-
 
         return view
     }
 }
+
+

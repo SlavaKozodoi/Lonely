@@ -49,4 +49,5 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navControler.navigateUp(conf) || super.onSupportNavigateUp()
     }
+
 }

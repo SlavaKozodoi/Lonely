@@ -23,7 +23,8 @@
     <string name="client_price_hint">0</string>
     <string name="client_additional">Побажання або додаткова інформація</string>
     <string name="client_btn">Додати запис</string>
-    <string name="client_emty"> </string>
+    <string name="client_btn_update">Оновити</string>
+    <string name="client_delete">Видалити </string>
 <!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
 <!--CLIENT ITEM ENTRY-->
     <string name="price_text">Ціна: </string>
@@ -35,5 +36,10 @@
     <string name="week_entries">Записи на неділю </string>
     <string name="mounts_entries">Записи на місяць </string>
 <!--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-->
+    <string name="done_dialog">Виконано </string>
+    <string name="update_dialog">Оновити </string>
+    <string name="price_dialog">Ціна: </string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

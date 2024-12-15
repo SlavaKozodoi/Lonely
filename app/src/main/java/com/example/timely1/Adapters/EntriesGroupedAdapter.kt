@@ -1,16 +1,22 @@
+import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.timely1.DataBase.DataBase
 import com.example.timely1.R
 import com.example.timely1.models.Entry
 
 class EntriesGroupedAdapter(
     private val items: List<Any>,
-    private val onInfoClick: (Entry) -> Unit
+    private val context: Context,
+    private val onDelete: (Entry) -> Unit,
+    private val onUpdate: (Entry) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -45,7 +51,7 @@ class EntriesGroupedAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (val item = items[position]) {
             is String -> (holder as DateHeaderViewHolder).bind(item)
-            is Entry -> (holder as EntryViewHolder).bind(item, onInfoClick) // Передаем коллбек
+            is Entry -> (holder as EntryViewHolder).bind(item, context, onDelete, onUpdate)
         }
     }
 
@@ -65,15 +71,41 @@ class EntriesGroupedAdapter(
         private val clientPrice: TextView = itemView.findViewById(R.id.client_price_textView)
         private val buttonInfo: CardView = itemView.findViewById(R.id.cardView)
 
-        fun bind(entry: Entry, onInfoClick: (Entry) -> Unit) {
+
+        fun bind(
+            entry: Entry,
+            context: Context,
+            onDelete: (Entry) -> Unit,
+            onUpdate: (Entry) -> Unit
+        ) {
             clientName.text = "${entry.name} ${entry.secondName}"
             clientTime.text = entry.time
             clientPrice.text = "${entry.price} грн"
 
             buttonInfo.setOnClickListener {
-                onInfoClick(entry)
+                // Показ всплывающего окна через DialogUtils
+                DialogUtils.showClientInfoDialog(
+                    context = context,
+                    entry = entry,
+                    onDeleteClick = {
+
+                    },
+                    onUpdateClick = {
+                        // Переход на экран для редактирования записи
+                        val navController = (context as AppCompatActivity).findNavController(R.id.fragmentContainerView)
+
+                        // Создаём Bundle с параметрами, которые будем передавать в New_entries
+                        val bundle = Bundle().apply {
+                            putLong("entry_id", entry.id.toLong())  // Передаем ID записи
+                        }
+
+                        // Навигация на экран New_entries с передачей Bundle
+                        navController.navigate(R.id.New_entries, bundle)
+                    }
+                )
             }
         }
     }
 }
+
 

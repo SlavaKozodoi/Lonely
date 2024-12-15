@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.timely1.models.Entry
 
 class DataBase(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
 
@@ -75,7 +76,7 @@ class DataBase(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB_
         db.close()
     }
 
-    fun deleteData(id: Long) {
+    fun deleteData(id: Int) {
         val db = writableDatabase
         db.delete(DB_TABLE, "ID = ?", arrayOf(id.toString()))
         db.close()
@@ -103,5 +104,63 @@ class DataBase(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB_
         cursor.close()
         db.close()
         return allEntries
+    }
+
+    fun updateData(
+        id: Long,
+        name: String,
+        secondName: String,
+        thirdName: String,
+        number: Long,
+        date: String,
+        time: String,
+        price: Double,
+        additional: String?
+    ) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(DB_COLUMN_NAME, name)
+            put(DB_COLUMN_SECONDNAME, secondName)
+            put(DB_COLUMN_THIRDNAME, thirdName)
+            put(DB_COLUMN_NUMBER, number)
+            put(DB_COLUMN_DATE, date)
+            put(DB_COLUMN_TIME, time)
+            put(DB_COLUMN_PRICE, price)
+            put(DB_COLUMN_ADDITIONAL, additional)
+        }
+
+        db.update(DB_TABLE, values, "ID = ?", arrayOf(id.toString()))
+        db.close()
+    }
+
+    fun getEntryById(id: Long): Entry? {
+        val db = readableDatabase
+        val cursor = db.query(
+            DB_TABLE,
+            null,
+            "ID = ?",
+            arrayOf(id.toString()),
+            null, null, null
+        )
+
+        if (cursor != null && cursor.moveToFirst()) {
+            val entry = Entry(
+                id = cursor.getInt(cursor.getColumnIndexOrThrow("ID")),
+                name = cursor.getString(cursor.getColumnIndexOrThrow(DB_COLUMN_NAME)),
+                secondName = cursor.getString(cursor.getColumnIndexOrThrow(DB_COLUMN_SECONDNAME)),
+                thirdName = cursor.getString(cursor.getColumnIndexOrThrow(DB_COLUMN_THIRDNAME)),
+                number = cursor.getLong(cursor.getColumnIndexOrThrow(DB_COLUMN_NUMBER)),
+                date = cursor.getString(cursor.getColumnIndexOrThrow(DB_COLUMN_DATE)),
+                time = cursor.getString(cursor.getColumnIndexOrThrow(DB_COLUMN_TIME)),
+                price = cursor.getDouble(cursor.getColumnIndexOrThrow(DB_COLUMN_PRICE)),
+                additional = cursor.getString(cursor.getColumnIndexOrThrow(DB_COLUMN_ADDITIONAL))
+            )
+            cursor.close()
+            db.close()
+            return entry
+        }
+        cursor?.close()
+        db.close()
+        return null
     }
 }
