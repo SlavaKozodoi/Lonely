@@ -9,5 +9,6 @@ data class Entry(
     val date:String,
     val time: String,
     val price: Double,
-    val additional:String
+    val additional:String,
+    var isDone:String
 )

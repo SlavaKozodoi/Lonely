@@ -1,8 +1,10 @@
 import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.view.isInvisible
 import com.example.timely1.R
 import com.example.timely1.models.Entry
 
@@ -25,10 +27,14 @@ object DialogUtils {
         dialogView.findViewById<TextView>(R.id.price_dialog).text = "${entry.price} грн"
         dialogView.findViewById<TextView>(R.id.additional_doalog).text = entry.additional
 
-        // Настраиваем кнопки
-        dialogView.findViewById<Button>(R.id.delBtn_dialog).setOnClickListener {
+        val donebtn:Button = dialogView.findViewById(R.id.delBtn_dialog)
+        if(entry.isDone=="true")
+            donebtn.visibility = View.GONE
+        else{
+        donebtn.setOnClickListener {
             onDeleteClick()
             dialog.dismiss()
+        }
         }
 
         dialogView.findViewById<Button>(R.id.updateBtn_dialog).setOnClickListener {

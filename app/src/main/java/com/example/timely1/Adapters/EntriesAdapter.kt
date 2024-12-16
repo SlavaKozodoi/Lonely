@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timely1.R
@@ -18,7 +19,7 @@ class EntriesAdapter(
         val clientName: TextView = itemView.findViewById(R.id.client_fullname_textView)
         val clientTime: TextView = itemView.findViewById(R.id.client_time_textView)
         val clientPrice: TextView = itemView.findViewById(R.id.client_price_textView)
-        val buttonInfo: Button = itemView.findViewById(R.id.button_dop_info)
+        val buttonInfo: ImageView = itemView.findViewById(R.id.image_isDone)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryViewHolder {

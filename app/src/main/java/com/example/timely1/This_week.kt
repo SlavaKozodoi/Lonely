@@ -42,7 +42,8 @@ class This_week : Fragment() {
                 date = it["client_date"] as String,
                 time = it["client_time"] as String,
                 price = it["client_price"] as Double,
-                additional = it["client_additional"] as String
+                additional = it["client_additional"] as String,
+                isDone = it["client_isDone"] as String
             )
         }
 
@@ -64,7 +65,7 @@ class This_week : Fragment() {
             val entryDate = LocalDate.parse(it.date, formatter)
 
             // Проверяем, попадает ли запись в диапазон с понедельника по воскресенье
-            entryDate >= monday && entryDate <= sunday && entryDate>= currentDate
+            entryDate >= monday && entryDate <= sunday && entryDate>= currentDate && it.isDone == "false"
         }
 
         // Сортируем по дате (если нужно)

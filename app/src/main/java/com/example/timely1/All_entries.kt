@@ -40,8 +40,8 @@ class All_entries : Fragment() {
                 date = it["client_date"] as String,
                 time = it["client_time"] as String,
                 price = it["client_price"] as Double,
-                additional = it["client_additional"] as String
-            )
+                additional = it["client_additional"] as String,
+                isDone = it["client_isDone"] as String )
         }
 
 
@@ -51,7 +51,7 @@ class All_entries : Fragment() {
 
         val listItems = mutableListOf<Any>()
 
-        // Сортируем по дате
+
         groupedEntries.toSortedMap(compareBy { LocalDate.parse(it, formatter) }).forEach { (date, entriesForDate) ->
             listItems.add(date)
             val sortedEntries = entriesForDate.sortedBy { it.time }
@@ -63,11 +63,11 @@ class All_entries : Fragment() {
             items = listItems,
             context = requireContext(),
             onDelete = { entry ->
-                // Логика удаления клиента
+
                 Toast.makeText(requireContext(), "Удалён: ${entry.name}", Toast.LENGTH_SHORT).show()
             },
             onUpdate = { entry ->
-                // Логика обновления клиента
+
                 Toast.makeText(requireContext(), "Обновление: ${entry.name}", Toast.LENGTH_SHORT).show()
             }
         )

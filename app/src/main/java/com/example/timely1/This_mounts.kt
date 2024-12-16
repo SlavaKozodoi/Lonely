@@ -48,17 +48,19 @@ class This_mounts : Fragment() {
                 date = it["client_date"] as String,
                 time = it["client_time"] as String,
                 price = it["client_price"] as Double,
-                additional = it["client_additional"] as String
+                additional = it["client_additional"] as String,
+                isDone = it["client_isDone"] as String
+
             )
         }
 
 
         val currentDate = LocalDate.now()
 
-// Находим первый день текущего месяца
+
         val firstDayOfMonth = currentDate.withDayOfMonth(1)
 
-// Находим последний день текущего месяца
+
         val lastDayOfMonth = currentDate.withDayOfMonth(currentDate.lengthOfMonth())
 
 // Форматируем дату для парсинга
@@ -70,7 +72,7 @@ class This_mounts : Fragment() {
             val entryDate = LocalDate.parse(it.date, formatter)
 
             // Проверяем, попадает ли дата записи в текущий месяц
-            entryDate >= firstDayOfMonth && entryDate <= lastDayOfMonth && entryDate >=currentDate
+            entryDate >= firstDayOfMonth && entryDate <= lastDayOfMonth && entryDate >=currentDate && it.isDone == "false"
         }
 
         // Сортируем по дате (если нужно)

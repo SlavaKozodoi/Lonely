@@ -39,7 +39,16 @@
     <string name="done_dialog">Виконано </string>
     <string name="update_dialog">Оновити </string>
     <string name="price_dialog">Ціна: </string>
-<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="today_earning">Сьогодні</string>
+    <string name="week_earning">Неділя</string>
+    <string name="month_earning">Місяць</string>
+    <string name="kvartal_earning">Квартал</string>
+    <string name="count_clients_earning">Кількість клієнтів:</string>
+    <string name="summa_earning">Сума:</string>
+    <string name="earning">Заробіток:</string>
+
+
 
 </resources>
