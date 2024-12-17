@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.timely1.DataBase.DataBase
@@ -23,6 +24,7 @@ class New_entries : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_new_entries, container, false)
 
+        val title:TextView = view.findViewById(R.id.title)
         val editTextName: EditText = view.findViewById(R.id.editTextName)
         val editTextSecondName: EditText = view.findViewById(R.id.editTextSecondName)
         val editTextThirdName: EditText = view.findViewById(R.id.editTextThirdName)
@@ -33,7 +35,7 @@ class New_entries : Fragment() {
         val editTextTextAdditional: EditText = view.findViewById(R.id.editTextTextAdditional)
         val buttonAdd: Button = view.findViewById(R.id.Add_btn)
         val buttonDel: Button = view.findViewById(R.id.button_del)
-
+        buttonDel.visibility = View.GONE
         db = DataBase(requireContext())
 
         // Проверяем наличие переданного ID из Bundle
@@ -50,7 +52,9 @@ class New_entries : Fragment() {
                     editTextTime.setText(entry.time)
                     editTextPrice.setText(entry.price.toString())
                     editTextTextAdditional.setText(entry.additional)
+                    buttonDel.visibility = View.VISIBLE
                     buttonAdd.text = "Обновить"
+                    title.text = R.string.update_dialog.toString()
                 }
             }
         }
@@ -68,7 +72,7 @@ class New_entries : Fragment() {
                     editTextPrice.text.toString().toDouble(),
                     editTextTextAdditional.text.toString()
                 )
-                Toast.makeText(requireContext(), "Добавлено!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Додано!", Toast.LENGTH_SHORT).show()
             } else {
                 // Обновление существующей записи
                 db.updateData(
@@ -82,7 +86,7 @@ class New_entries : Fragment() {
                     editTextPrice.text.toString().toDouble(),
                     editTextTextAdditional.text.toString()
                 )
-                Toast.makeText(requireContext(), "Обновлено!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Оновлено!", Toast.LENGTH_SHORT).show()
             }
 
             // После сохранения данных закрываем фрагмент

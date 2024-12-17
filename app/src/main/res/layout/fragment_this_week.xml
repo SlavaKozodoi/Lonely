@@ -25,6 +25,7 @@
                 android:fontFamily="@font/gabriela"
                 android:gravity="center"
                 android:text="@string/week_entries"
+                android:textColor="@color/white"
                 android:textSize="48sp"
                 android:textStyle="bold" />
 

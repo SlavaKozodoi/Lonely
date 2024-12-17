@@ -1,40 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view"
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    >
-
-    <group >
+    <group>
         <item
+            android:id="@+id/Today"
             android:title="@string/Title_today"
-            android:id="@+id/Today"/>
-
+            android:titleTextAppearance="@style/MenuItemTextStyle" />
 
         <item
+            android:id="@+id/This_week"
             android:title="@string/Title_this_week"
-            android:id="@+id/This_week"/>
+            android:titleTextAppearance="@style/MenuItemTextStyle" >
+        </item>
 
         <item
+            android:id="@+id/This_mounts"
             android:title="@string/Title_this_mounts"
-            android:id="@+id/This_mounts"/>
+            android:titleTextAppearance="@style/MenuItemTextStyle" />
 
         <item
+            android:id="@+id/All_entries"
             android:title="@string/All_entries"
-            android:id="@+id/All_entries"/>
+            android:titleTextAppearance="@style/MenuItemTextStyle" />
 
         <item
+            android:id="@+id/Earning"
             android:title="@string/Earning"
-            android:id="@+id/Earning"/>
+            android:titleTextAppearance="@style/MenuItemTextStyle" />
 
         <item
+            android:id="@+id/Setings"
             android:title="@string/Setings"
-            android:id="@+id/Setings"/>
+            android:titleTextAppearance="@style/MenuItemTextStyle" />
 
-        <item
-            android:title="@string/New_entries"
-            android:id="@+id/New_entries"
-
-            />
     </group>
 </menu>

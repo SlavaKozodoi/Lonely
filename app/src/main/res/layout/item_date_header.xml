@@ -6,10 +6,11 @@
     <TextView
         android:id="@+id/dateTextView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/gabriela"
         android:gravity="center"
         android:padding="16dp"
+        android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         tools:ignore="MissingConstraints" />

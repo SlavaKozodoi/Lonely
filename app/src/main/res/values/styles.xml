@@ -1,0 +1,10 @@
+<resources>
+
+
+    <style name="MenuItemTextStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/gabriela</item>
+    </style>
+
+</resources>
