@@ -1,6 +1,10 @@
 package com.example.timely1
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +15,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.timely1.DataBase.DataBase
+import com.example.timely1.Notification.ReminderReceiver
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class New_entries : Fragment() {
 
@@ -53,13 +60,16 @@ class New_entries : Fragment() {
                     editTextPrice.setText(entry.price.toString())
                     editTextTextAdditional.setText(entry.additional)
                     buttonDel.visibility = View.VISIBLE
-                    buttonAdd.text = "Обновить"
+                    buttonAdd.text = "Оновити"
                     title.text = R.string.update_dialog.toString()
                 }
             }
         }
 
         buttonAdd.setOnClickListener {
+            val name = "${editTextName.text} ${editTextSecondName.text}"
+            val time = "${editTextDate.text} ${editTextTime.text}"
+
             if (entryId == -1L) {
                 // Добавление новой записи
                 db.insertData(
@@ -72,9 +82,9 @@ class New_entries : Fragment() {
                     editTextPrice.text.toString().toDouble(),
                     editTextTextAdditional.text.toString()
                 )
+                scheduleReminder(requireContext(), name, time)
                 Toast.makeText(requireContext(), "Додано!", Toast.LENGTH_SHORT).show()
             } else {
-                // Обновление существующей записи
                 db.updateData(
                     entryId,
                     editTextName.text.toString(),
@@ -86,10 +96,10 @@ class New_entries : Fragment() {
                     editTextPrice.text.toString().toDouble(),
                     editTextTextAdditional.text.toString()
                 )
+                scheduleReminder(requireContext(), name, time)
                 Toast.makeText(requireContext(), "Оновлено!", Toast.LENGTH_SHORT).show()
             }
 
-            // После сохранения данных закрываем фрагмент
             requireActivity().supportFragmentManager.popBackStack()
         }
 
@@ -101,6 +111,37 @@ class New_entries : Fragment() {
 
         return view
     }
+
+    @SuppressLint("ScheduleExactAlarm")
+    fun scheduleReminder(context: Context, name: String, time: String) {
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val intent = Intent(context, ReminderReceiver::class.java).apply {
+            putExtra("client_name", name)
+            putExtra("client_time", time)
+        }
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            time.hashCode(), // Уникальный код для каждого напоминания
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        // Исправление: формат даты соответствует входным данным
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
+        val appointmentTime = dateFormat.parse(time)?.time ?: return
+
+        // Установка времени за 2 часа до записи
+        val reminderTime = appointmentTime - 2 * 60 * 60 * 1000
+
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            reminderTime,
+            pendingIntent
+        )
+    }
+
 }
 
 
