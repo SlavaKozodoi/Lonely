@@ -26,7 +26,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="550dp"
+            android:layout_height="598dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="60dp"
@@ -40,11 +40,15 @@
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:ems="10"
+                android:layout_marginBottom="8dp"
 
+                android:background="@drawable/number_picker_style"
+                android:ems="10"
                 android:fontFamily="@font/gabriela"
                 android:hint="@string/client_name"
                 android:inputType="text"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:textColorHint="#80FFFFFF"
                 android:textStyle="bold" />
 
@@ -52,10 +56,13 @@
                 android:id="@+id/editTextSecondName"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/number_picker_style"
                 android:ems="10"
                 android:fontFamily="@font/gabriela"
                 android:hint="@string/client_secondname"
                 android:inputType="text"
+                android:paddingStart="10dp"
                 android:textColorHint="#80FFFFFF"
                 android:textStyle="bold" />
 
@@ -63,21 +70,27 @@
                 android:id="@+id/editTextThirdName"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/number_picker_style"
                 android:ems="10"
                 android:fontFamily="@font/gabriela"
                 android:hint="@string/client_thirdname"
                 android:inputType="text"
+                android:paddingStart="10dp"
                 android:textColorHint="#80FFFFFF"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editTextPhone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/number_picker_style"
                 android:ems="10"
                 android:fontFamily="@font/gabriela"
                 android:hint="@string/client_number"
                 android:inputType="phone"
+                android:paddingStart="10dp"
                 android:textColorHint="#80FFFFFF"
                 android:textStyle="bold" />
 
@@ -100,12 +113,15 @@
                     android:id="@+id/editTextDate"
                     android:layout_width="392dp"
                     android:layout_height="48dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:height="45dp"
+                    android:background="@drawable/number_picker_style"
                     android:ems="10"
                     android:fontFamily="@font/gabriela"
                     android:hint="@string/client_dateof_hint"
                     android:inputType="date"
+                    android:paddingStart="10dp"
                     android:textColorHint="#80FFFFFF"
                     android:textStyle="bold" />
 
@@ -130,12 +146,15 @@
                     android:id="@+id/editTextTime"
                     android:layout_width="392dp"
                     android:layout_height="48dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:height="45dp"
+                    android:background="@drawable/number_picker_style"
                     android:ems="10"
                     android:fontFamily="@font/gabriela"
                     android:hint="@string/client_timeof_hint"
                     android:inputType="time"
+                    android:paddingStart="10dp"
                     android:textColorHint="#80FFFFFF"
                     android:textStyle="bold" />
 
@@ -160,12 +179,15 @@
                     android:id="@+id/editTextPrice"
                     android:layout_width="392dp"
                     android:layout_height="48dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:height="45dp"
+                    android:background="@drawable/number_picker_style"
                     android:ems="10"
                     android:fontFamily="@font/gabriela"
                     android:hint="@string/client_price_hint"
                     android:inputType="numberDecimal"
+                    android:paddingStart="10dp"
                     android:textColorHint="#80FFFFFF"
                     android:textStyle="bold" />
 
@@ -185,10 +207,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="83dp"
                 android:height="48dp"
+                android:background="@drawable/number_picker_style"
                 android:ems="10"
                 android:fontFamily="@font/gabriela"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
+                android:paddingStart="10dp"
                 android:textColorHint="#80FFFFFF"
                 android:textStyle="bold" />
 

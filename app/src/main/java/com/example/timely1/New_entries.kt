@@ -128,19 +128,26 @@ class New_entries : Fragment() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        // Исправление: формат даты соответствует входным данным
+        // Формат даты для парсинга входных данных
         val dateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
         val appointmentTime = dateFormat.parse(time)?.time ?: return
 
-        // Установка времени за 2 часа до записи
-        val reminderTime = appointmentTime - 2 * 60 * 60 * 1000
+        // Получение пользовательских настроек
+        val sharedPref = context.getSharedPreferences("notification_settings", Context.MODE_PRIVATE)
+        val reminderHours = sharedPref.getInt("reminder_hours", 1) // По умолчанию 1 час
+        val reminderMinutes = sharedPref.getInt("reminder_minutes", 0) // По умолчанию 0 минут
 
+        // Рассчитываем время уведомления
+        val reminderTime = appointmentTime - (reminderHours * 60 * 60 * 1000) - (reminderMinutes * 60 * 1000)
+
+        // Запланировать уведомление
         alarmManager.setExactAndAllowWhileIdle(
             AlarmManager.RTC_WAKEUP,
             reminderTime,
             pendingIntent
         )
     }
+
 
 }
 

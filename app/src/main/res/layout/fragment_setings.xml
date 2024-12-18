@@ -1,10 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Setings">
+    android:orientation="vertical"
+    android:padding="16dp"
+    > <!-- Светлый фон -->
+
+    <!-- Заголовок уведомлений -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gabriela"
+        android:text="Повідомлення"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- Switch для включения/выключения уведомлений -->
+    <Switch
+        android:id="@+id/switch_notifications"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:fontFamily="@font/gabriela"
+        android:text="Увімкнути повідомлення"
+        android:textColor="@color/white"
+        android:thumbTint="@color/Drawer_main_color" />
+
+    <!-- Заголовок для выбора времени -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/gabriela"
+        android:text="Час до запису"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <!-- Контейнер для выбора часов и минут -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- NumberPicker для часов -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Години"
+                android:fontFamily="@font/gabriela"
+                android:textColor="@color/Drawer_main_color" />
+
+            <NumberPicker
+                android:id="@+id/numberPicker_hours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/number_picker_style"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <!-- NumberPicker для минут -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Хвилини"
+                android:fontFamily="@font/gabriela"
+                android:textColor="@color/Drawer_main_color" />
+
+            <NumberPicker
+                android:id="@+id/numberPicker_minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/number_picker_style"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
 
 
-
-</FrameLayout>
+    </LinearLayout>
+    <Button
+        android:id="@+id/button_apply_all"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Застосувати до всіх записів"
+        android:backgroundTint="#D67878"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="16dp" />
+</LinearLayout>

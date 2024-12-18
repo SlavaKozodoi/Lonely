@@ -3,6 +3,7 @@ package com.example.timely1.Notification
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -38,14 +39,27 @@ class NotificationHelper(private val context: Context) {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+        // Intent для открытия главного Activity
+        val intent = context.packageManager.getLaunchIntentForPackage(context.packageName)
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            0,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        // Создание уведомления
         val notification = NotificationCompat.Builder(context, channelId)
             .setContentTitle("Нагадування про запис")
-            .setContentText("${name} записан(а) на $time")
+            .setContentText("$name записан(а) на $time")
             .setSmallIcon(R.drawable.check) // Убедитесь, что у вас есть иконка с этим ID
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setAutoCancel(true)
+            .setContentIntent(pendingIntent) // Добавляем PendingIntent
+            .setAutoCancel(true) // Убираем уведомление после нажатия
             .build()
 
+        // Показ уведомления
         notificationManager.notify(notificationId, notification)
     }
+
 }
