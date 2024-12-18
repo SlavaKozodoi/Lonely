@@ -6,6 +6,9 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.timely1.models.Entry
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class DataBase(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
 
@@ -194,4 +197,19 @@ class DataBase(context: Context?) : SQLiteOpenHelper(context, DB_NAME, null, DB_
         db.update(DB_TABLE, values, "ID = ?", arrayOf(entryId.toString()))
         db.close()
     }
+
+    fun deleteOldEntries() {
+        val db = this.writableDatabase
+
+        // Определяем дату 3 месяца и 5 дней назад
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.MONTH, -3)
+        calendar.add(Calendar.DAY_OF_MONTH, -5)
+        val cutoffDate = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(calendar.time)
+
+        // Удаляем записи с датой меньше cutoffDate
+        db.delete(DB_TABLE, "$DB_COLUMN_DATE < ?", arrayOf(cutoffDate))
+        db.close()
+    }
+
 }

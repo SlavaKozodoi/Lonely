@@ -41,43 +41,44 @@ class All_entries : Fragment() {
                 time = it["client_time"] as String,
                 price = it["client_price"] as Double,
                 additional = it["client_additional"] as String,
-                isDone = it["client_isDone"] as String )
+                isDone = it["client_isDone"] as String
+            )
         }
 
-
         val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
-
         val groupedEntries = entries.groupBy { it.date }
 
         val listItems = mutableListOf<Any>()
-
+        val dateList = mutableListOf<String>()
 
         groupedEntries.toSortedMap(compareBy { LocalDate.parse(it, formatter) }).forEach { (date, entriesForDate) ->
             listItems.add(date)
+            dateList.add(date) // Collect the dates for fast scrolling
             val sortedEntries = entriesForDate.sortedBy { it.time }
             listItems.addAll(sortedEntries)
         }
-
 
         val adapter = EntriesGroupedAdapter(
             items = listItems,
             context = requireContext(),
             onDelete = { entry ->
-
                 Toast.makeText(requireContext(), "Удалён: ${entry.name}", Toast.LENGTH_SHORT).show()
             },
             onUpdate = { entry ->
-
                 Toast.makeText(requireContext(), "Обновление: ${entry.name}", Toast.LENGTH_SHORT).show()
             }
         )
 
-
-
-
         itemsRecycler.layoutManager = LinearLayoutManager(requireContext())
         itemsRecycler.adapter = adapter
+
+        // Attach the fast scroller and set date list
+        val fastScroller: CustomFastScroller = view.findViewById(R.id.fastScroller)
+        fastScroller.setDateList(dateList)
+        fastScroller.attachToRecyclerView(itemsRecycler)
 
         return view
     }
 }
+
+

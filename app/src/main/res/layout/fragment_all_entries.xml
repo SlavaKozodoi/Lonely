@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView5"
@@ -29,18 +28,19 @@
                 android:textSize="48sp"
                 android:textStyle="bold" />
 
-            <RelativeLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/items_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="698dp"
-                tools:context=".All_entries">
+                android:layout_height="wrap_content"
+                android:padding="8dp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/items_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="8dp" />
-            </RelativeLayout>
-
+            <!-- FastScroller with dates -->
+            <com.example.timely1.CustomFastScroller
+                android:id="@+id/fastScroller"
+                android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp" />
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

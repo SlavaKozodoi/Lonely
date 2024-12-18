@@ -65,4 +65,3 @@ class Setings : Fragment() {
         sharedPreferences.edit().putInt("reminder_time", timeInMillis).apply()
     }
 }
-
