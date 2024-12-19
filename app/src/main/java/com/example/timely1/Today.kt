@@ -1,12 +1,14 @@
 package com.example.timely1
 
 import EntriesGroupedAdapter
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,12 +20,14 @@ import java.time.format.DateTimeFormatter
 
 class Today : Fragment() {
 
+    @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_today, container, false)
+
 
         val itemsRecycler: RecyclerView = view.findViewById(R.id.items_recycler)
         val db = DataBase(requireContext())
@@ -44,6 +48,7 @@ class Today : Fragment() {
             )
         }
 
+
         // Получаем текущую дату
         val currentDate = LocalDate.now()
         val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
@@ -52,7 +57,13 @@ class Today : Fragment() {
         val filteredEntries = entries.filter {
             val entryDate = LocalDate.parse(it.date, formatter) // Парсим дату из записи
             entryDate == currentDate && it.isDone == "false"
+
         }
+        val nonitems:TextView = view.findViewById(R.id.textView)
+        if(filteredEntries.isEmpty())
+            nonitems.visibility = View.VISIBLE
+        else
+            nonitems.visibility = View.GONE
 
         // Сортируем по дате (если нужно)
         val groupedEntries = filteredEntries.groupBy { it.date }

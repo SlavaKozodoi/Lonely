@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_setings"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    > <!-- Светлый фон -->
+    android:padding="16dp"> <!-- Светлый фон -->
 
     <!-- Заголовок уведомлений -->
     <TextView
@@ -14,7 +14,7 @@
         android:fontFamily="@font/gabriela"
         android:text="Повідомлення"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="28sp"
         android:textStyle="bold" />
 
     <!-- Switch для включения/выключения уведомлений -->
@@ -23,46 +23,50 @@
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:fontFamily="@font/gabriela"
+        android:gravity="top"
         android:text="Увімкнути повідомлення"
         android:textColor="@color/white"
+        android:textSize="20sp"
         android:thumbTint="@color/Drawer_main_color" />
 
     <!-- Заголовок для выбора времени -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="25dp"
         android:fontFamily="@font/gabriela"
         android:text="Час до запису"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <!-- Контейнер для выбора часов и минут -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <!-- NumberPicker для часов -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginEnd="16dp">
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Години"
                 android:fontFamily="@font/gabriela"
-                android:textColor="@color/Drawer_main_color" />
+                android:text="Години"
+                android:textColor="@color/Drawer_main_color"
+                android:textSize="20sp" />
 
             <NumberPicker
                 android:id="@+id/numberPicker_hours"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:background="@drawable/number_picker_style"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
@@ -76,26 +80,33 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Хвилини"
                 android:fontFamily="@font/gabriela"
-                android:textColor="@color/Drawer_main_color" />
+                android:text="Хвилини"
+                android:textColor="@color/Drawer_main_color"
+                android:textSize="20sp" />
 
             <NumberPicker
                 android:id="@+id/numberPicker_minutes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:background="@drawable/number_picker_style"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 
 
     </LinearLayout>
+
     <Button
         android:id="@+id/button_apply_all"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Застосувати до всіх записів"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#D67878"
+        android:fontFamily="@font/gabriela"
+        android:text="Застосувати до всіх записів"
         android:textColor="#FFFFFF"
-        android:layout_marginTop="16dp" />
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="8dp" />
 </LinearLayout>

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +21,7 @@ import java.time.format.DateTimeFormatter
 
 class All_entries : Fragment() {
 
+    @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +59,11 @@ class All_entries : Fragment() {
             val sortedEntries = entriesForDate.sortedBy { it.time }
             listItems.addAll(sortedEntries)
         }
+        val nonitems: TextView = view.findViewById(R.id.textView)
+        if(groupedEntries.isEmpty())
+            nonitems.visibility = View.VISIBLE
+        else
+            nonitems.visibility = View.GONE
 
         val adapter = EntriesGroupedAdapter(
             items = listItems,

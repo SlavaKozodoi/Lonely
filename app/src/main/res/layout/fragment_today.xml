@@ -5,6 +5,24 @@
     android:layout_height="match_parent"
     tools:context=".Today">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="350dp"
+        android:fontFamily="@font/gabriela"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:text="Записи відсутні"
+        android:textColor="#9B9B9B"
+        android:textSize="20sp"
+        android:visibility="invisible" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

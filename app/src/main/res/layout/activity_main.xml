@@ -29,12 +29,13 @@
         <Button
             android:id="@+id/newEntries_btn"
             style="@style/Widget.Material3.Button.ElevatedButton"
-            android:layout_width="213dp"
-            android:layout_height="64dp"
+            android:layout_width="220dp"
+            android:layout_height="75dp"
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginBottom="100dp"
             android:fontFamily="@font/gabriela"
             android:text="@string/New_entries"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:cornerRadius="8dp" />
     </com.google.android.material.navigation.NavigationView>

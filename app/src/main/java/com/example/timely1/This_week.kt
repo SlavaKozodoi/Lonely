@@ -1,12 +1,14 @@
 package com.example.timely1
 
 import EntriesGroupedAdapter
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +22,7 @@ import java.time.format.DateTimeFormatter
 
 class This_week : Fragment() {
 
+    @SuppressLint("MissingInflatedId")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,6 +70,11 @@ class This_week : Fragment() {
             // Проверяем, попадает ли запись в диапазон с понедельника по воскресенье
             entryDate >= monday && entryDate <= sunday && entryDate>= currentDate && it.isDone == "false"
         }
+        val nonitems: TextView = view.findViewById(R.id.textView)
+        if(filteredEntries.isEmpty())
+            nonitems.visibility = View.VISIBLE
+        else
+            nonitems.visibility = View.GONE
 
         // Сортируем по дате (если нужно)
         val groupedEntries = filteredEntries.groupBy { it.date }

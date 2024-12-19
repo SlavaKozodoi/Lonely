@@ -34,8 +34,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        val db:DataBase = DataBase(this)
-        db.deleteOldEntries()
+
 
         // Привязка макета через ViewBinding
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -102,6 +101,8 @@ class MainActivity : AppCompatActivity() {
                 .build()
             navController.navigate(R.id.New_entries, null, navOptions)
         }
+        val db:DataBase = DataBase(this)
+        db.deleteOldEntries()
     }
 
     // Обработка кнопки "Назад" в Toolbar

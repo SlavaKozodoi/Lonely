@@ -74,6 +74,11 @@ class This_mounts : Fragment() {
             // Проверяем, попадает ли дата записи в текущий месяц
             entryDate >= firstDayOfMonth && entryDate <= lastDayOfMonth && entryDate >=currentDate && it.isDone == "false"
         }
+        val nonitems:TextView = view.findViewById(R.id.textView)
+        if(filteredEntries.isEmpty())
+            nonitems.visibility = View.VISIBLE
+        else
+            nonitems.visibility = View.GONE
 
         // Сортируем по дате (если нужно)
         val groupedEntries = filteredEntries.groupBy { it.date }

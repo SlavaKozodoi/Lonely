@@ -9,23 +9,24 @@
         android:layout_height="400dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:background="@color/Drawer_main_color"
-        android:backgroundTint="@color/Drawer_main_color"
+
         app:cardCornerRadius="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/white_border">
 
             <TextView
                 android:id="@+id/fullname_dialog"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_height="56dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="25dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="15dp"
                 android:fontFamily="@font/gabriela"
+                android:gravity="top|left"
                 android:text="TextView"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
@@ -34,9 +35,9 @@
                 android:id="@+id/number_dialog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="15dp"
                 android:fontFamily="@font/gabriela"
                 android:text="TextView"
                 android:textColor="@color/white"
@@ -51,7 +52,7 @@
                     android:id="@+id/date_dialog"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/gabriela"
@@ -61,10 +62,10 @@
 
                 <TextView
                     android:id="@+id/time_dialog"
-                    android:layout_width="wrap_content"
+                    android:layout_width="121dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="15dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/gabriela"
                     android:text="TextView"
@@ -81,7 +82,7 @@
                     android:id="@+id/textView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/gabriela"
@@ -94,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="15dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/gabriela"
                     android:text="TextView"
@@ -106,9 +107,9 @@
                 android:id="@+id/additional_doalog"
                 android:layout_width="match_parent"
                 android:layout_height="76dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="15dp"
                 android:fontFamily="@font/gabriela"
                 android:text="TextView"
                 android:textColor="@color/white"
@@ -121,26 +122,34 @@
 
                 <Button
                     android:id="@+id/delBtn_dialog"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="15dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
                     android:layout_marginBottom="2dp"
                     android:layout_weight="1"
-                    android:text="@string/done_dialog" />
+                    android:text="@string/done_dialog"
+                    app:cornerRadius="10dp"
+                    app:strokeColor="@color/white"
+                    app:strokeWidth="1dp" />
+
 
                 <Button
                     android:id="@+id/updateBtn_dialog"
-                    style="@style/Widget.Material3.Button.ElevatedButton"
-                    android:layout_width="wrap_content"
+
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="15dp"
                     android:layout_marginBottom="2dp"
                     android:layout_weight="1"
-                    android:text="@string/update_dialog" />
+                    android:text="@string/update_dialog"
+                    app:cornerRadius="10dp"
+                    style="@style/Widget.Material3.Button.ElevatedButton"/>
             </LinearLayout>
 
         </LinearLayout>

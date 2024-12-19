@@ -7,6 +7,21 @@
         <item name="android:fontFamily">@font/gabriela</item>
     </style>
 
+        <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+            <!-- Задайте базовый стиль для кнопок -->
+            <item name="buttonStyle">@style/BaseButtonStyle</item>
+        </style>
+
+        <style name="BaseButtonStyle" parent="Widget.AppCompat.Button">
+            <!-- Убираем фон -->
+            <item name="android:background">@android:color/transparent</item>
+            <!-- Убираем отступы -->
+            <item name="android:padding">0dp</item>
+            <!-- Убираем дефолтный текстовый стиль -->
+            <item name="android:textAppearance">?android:attr/textAppearance</item>
+        </style>
+
+
 
 
 </resources>
