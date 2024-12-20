@@ -132,7 +132,8 @@
                     android:layout_weight="1"
                     android:text="@string/done_dialog"
                     app:cornerRadius="10dp"
-                    app:strokeColor="@color/white"
+                    android:textColor="#FFFFFF"
+                    app:strokeColor="#FFFFFF"
                     app:strokeWidth="1dp" />
 
 
@@ -149,6 +150,7 @@
                     android:layout_weight="1"
                     android:text="@string/update_dialog"
                     app:cornerRadius="10dp"
+                    android:backgroundTint="#FFFFFF"
                     style="@style/Widget.Material3.Button.ElevatedButton"/>
             </LinearLayout>
 

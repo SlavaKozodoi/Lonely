@@ -18,6 +18,8 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.timely1.DataBase.DataBase
 import com.example.timely1.Notification.ReminderReceiver
 import java.text.SimpleDateFormat
@@ -32,9 +34,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         enableEdgeToEdge()
-
-
 
         // Привязка макета через ViewBinding
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -49,6 +53,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
 
         // Настройка контроллера навигации
         navController = findNavController(R.id.fragmentContainerView)

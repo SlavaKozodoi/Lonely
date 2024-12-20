@@ -1,9 +1,23 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Timely1" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Timely1" parent="Theme.Material3.Light.NoActionBar">
         <!-- Customize your light theme here. -->
          <item name="colorPrimary">@color/Drawer_main_color</item>
+        <item name="android:forceDarkAllowed">false</item> <!-- Запрет системного авто-Dark Mode -->
+
     </style>
 
     <style name="Theme.Timely1" parent="Base.Theme.Timely1" />
+
+    <style name="Theme.Timely1.Splash" parent="Theme.SplashScreen">
+        <!-- Задаём иконку приложения -->
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_round</item>
+        <item name="windowSplashScreenAnimationDuration">500</item> <!-- Длительность анимации в мс -->
+        <item name="postSplashScreenTheme">@style/Theme.Timely1</item> <!-- Тема приложения после Splash -->
+    </style>
+
 </resources>
+
+
+

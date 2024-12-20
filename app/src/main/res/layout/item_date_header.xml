@@ -10,7 +10,7 @@
         android:fontFamily="@font/gabriela"
         android:gravity="center"
         android:padding="16dp"
-        android:textColor="@color/white"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
         tools:ignore="MissingConstraints" />
