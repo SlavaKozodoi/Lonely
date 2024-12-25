@@ -79,7 +79,7 @@ class New_entries : Fragment() {
 
         buttonAdd.setOnClickListener {
             val name = "${editTextName.text} ${editTextSecondName.text}"
-            val time = "${textViewDate.text} ${textViewTime.text}"
+            var time = "${textViewDate.text} ${textViewTime.text}"
 
             // Проверка на обязательные поля
             if (editTextName.text.isEmpty()) {
@@ -87,15 +87,23 @@ class New_entries : Fragment() {
                 return@setOnClickListener
             }
 
-            if (editTextPrice.text.isEmpty()) {
-                Toast.makeText(requireContext(), "Ціна обов'язкова!", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
             // Проверка на корректность даты
             val dateText = textViewDate.text.toString()
             if (dateText.isEmpty() || !isValidDate(dateText)) {
                 Toast.makeText(requireContext(), "Дата не може бути пустою чи раніше чим сьогодні!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Проверка на пустое время
+            val timeText = textViewTime.text.toString()
+            if (timeText.isEmpty()) {
+                Toast.makeText(requireContext(), "Час обов'язковий!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+
+            if (editTextPrice.text.isEmpty()) {
+                Toast.makeText(requireContext(), "Ціна обов'язкова!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -107,24 +115,15 @@ class New_entries : Fragment() {
                 return@setOnClickListener
             }
 
-            // Проверка на пустую строку для телефона
-            val phoneString = editTextPhone.text.toString()
-            val phone: Long = if (phoneString.isEmpty()) {
-                Toast.makeText(requireContext(), "Номер телефону не може бути пустим!", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            } else {
-                phoneString.toLong()
-            }
-
+            // Если entryId == -1L, добавляем новую запись
             if (entryId == -1L) {
-                // Добавление новой записи
                 db.insertData(
                     editTextName.text.toString(),
                     editTextSecondName.text.toString(),
                     editTextThirdName.text.toString(),
-                    phone,
+                    editTextPhone.text.toString(),
                     dateText,
-                    textViewTime.text.toString(),
+                    timeText,
                     price,
                     editTextTextAdditional.text.toString()
                 )
@@ -137,9 +136,9 @@ class New_entries : Fragment() {
                     editTextName.text.toString(),
                     editTextSecondName.text.toString(),
                     editTextThirdName.text.toString(),
-                    phone,
+                    editTextPhone.text.toString(),
                     dateText,
-                    textViewTime.text.toString(),
+                    timeText,
                     price,
                     editTextTextAdditional.text.toString()
                 )
@@ -149,6 +148,7 @@ class New_entries : Fragment() {
 
             requireActivity().supportFragmentManager.popBackStack()
         }
+
 
 
 
@@ -256,7 +256,4 @@ class New_entries : Fragment() {
 
         return selectedDate != null && !selectedDate.before(currentDate.time)
     }
-
-
-
 }

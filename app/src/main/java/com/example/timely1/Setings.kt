@@ -1,6 +1,10 @@
 package com.example.timely1
 
+import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +14,10 @@ import android.widget.NumberPicker
 import android.widget.Switch
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.timely1.DataBase.DataBase
+import com.example.timely1.Notification.ReminderReceiver
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class Setings : Fragment() {
 
@@ -48,8 +56,7 @@ class Setings : Fragment() {
         // Обработка изменения состояния Switch
         switchNotifications.setOnCheckedChangeListener { _, isChecked ->
             saveSwitchState(isChecked)
-            val message = if (isChecked) "Повідомлення увімкнено" else "Повідомлення вимкнено"
-            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            toggleNotifications(isChecked)
         }
 
         // Обработка кнопки для применения ко всем записям
@@ -97,20 +104,77 @@ class Setings : Fragment() {
     }
 
     private fun applyToAllRecords(hours: Int, minutes: Int) {
-        val newReminderTime = (hours * 60 + minutes) * 60 * 1000 // перевод в миллисекунды
+        val newReminderTimeOffsetInMillis = (hours * 60 + minutes) * 60 * 1000
+        val db: DataBase = DataBase(requireContext())
+
+        // Получаем все записи из базы данных
+        val allEntries = db.getAllEntriesForMes()
+        for (entry in allEntries) {
+            // Парсим дату и время записи клиента
+            val appointmentTime = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
+                .parse("${entry.date} ${entry.time}")?.time ?: continue
+
+            // Вычисляем новое время напоминания
+            val newReminderTime = appointmentTime - newReminderTimeOffsetInMillis
+
+            // Убедимся, что напоминание ставится на будущее
+            if (newReminderTime > System.currentTimeMillis() && switchNotifications.isChecked) {
+                scheduleReminder(requireContext(), entry.name, newReminderTime)
+            }
+        }
+
         Toast.makeText(
             requireContext(),
-            "Нове нагадування буде за $hours год. $minutes хв.",
+            "Час нагадувань для всіх записів оновлено!",
             Toast.LENGTH_SHORT
         ).show()
-        saveReminderTime(newReminderTime)
     }
 
-    private fun saveReminderTime(timeInMillis: Int) {
-        val sharedPreferences =
-            requireContext().getSharedPreferences(sharedPrefsName, Context.MODE_PRIVATE)
-        sharedPreferences.edit().putInt("reminder_time", timeInMillis).apply()
+
+    private fun toggleNotifications(isEnabled: Boolean) {
+        val sharedPreferences = requireContext().getSharedPreferences(sharedPrefsName, Context.MODE_PRIVATE)
+        sharedPreferences.edit().putBoolean(switchKey, isEnabled).apply()
+
+        if (isEnabled) {
+            Toast.makeText(requireContext(), "Усі нагадування увімкнені", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), "Усі нагадування вимкнені", Toast.LENGTH_SHORT).show()
+        }
     }
+
+
+
+
+
+
+    @SuppressLint("ScheduleExactAlarm")
+    private fun scheduleReminder(context: Context, name: String, timeInMillis: Long) {
+        val sharedPreferences = context.getSharedPreferences(sharedPrefsName, Context.MODE_PRIVATE)
+
+
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val intent = Intent(context, ReminderReceiver::class.java).apply {
+            putExtra("client_name", name)
+            putExtra(
+                "client_time",
+                SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()).format(timeInMillis)
+            )
+        }
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            context,
+            timeInMillis.hashCode(),
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            timeInMillis,
+            pendingIntent
+        )
+    }
+
+
 }
-
-

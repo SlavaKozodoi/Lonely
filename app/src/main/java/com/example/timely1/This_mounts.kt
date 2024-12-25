@@ -11,13 +11,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.findViewTreeViewModelStoreOwner
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.timely1.DataBase.DataBase
 import com.example.timely1.models.Entry
-import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
@@ -44,7 +41,7 @@ class This_mounts : Fragment() {
                 name = it["client_name"] as String,
                 secondName = it["client_second_name"] as String,
                 thirdName = it["client_third_name"] as String,
-                number = it["client_number"] as Long,
+                number = it["client_number"] as String,
                 date = it["client_date"] as String,
                 time = it["client_time"] as String,
                 price = it["client_price"] as Double,

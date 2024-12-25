@@ -5,7 +5,7 @@ data class Entry(
     val name: String,
     val secondName: String,
     val thirdName: String,
-    val number:Long,
+    val number: String,
     val date:String,
     val time: String,
     val price: Double,

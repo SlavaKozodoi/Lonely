@@ -16,6 +16,15 @@ class ReminderReceiver : BroadcastReceiver() {
         val name = intent.getStringExtra("client_name") ?: "Клиент"
         val dateTime = intent.getStringExtra("client_time") ?: "время неизвестно"
 
+        // Проверяем состояние переключателя
+        val sharedPreferences = context.getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val notificationsEnabled = sharedPreferences.getBoolean("notifications_enabled", false)
+
+        if (!notificationsEnabled) {
+            // Если уведомления отключены, ничего не показываем
+            return
+        }
+
         // Извлекаем только время из строки с датой и временем
         val time = extractTime(dateTime)
 
@@ -36,4 +45,5 @@ class ReminderReceiver : BroadcastReceiver() {
         }
     }
 }
+
 

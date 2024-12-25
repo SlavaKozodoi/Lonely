@@ -39,7 +39,7 @@ class Today : Fragment() {
                 name = it["client_name"] as String,
                 secondName = it["client_second_name"] as String,
                 thirdName = it["client_third_name"] as String,
-                number = it["client_number"] as Long,
+                number = it["client_number"] as String,
                 date = it["client_date"] as String,
                 time = it["client_time"] as String,
                 price = it["client_price"] as Double,
