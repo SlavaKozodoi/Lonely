@@ -1,5 +1,8 @@
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
+import android.graphics.Color
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -24,8 +27,20 @@ object DialogUtils {
             .create()
 
         // Настройка данных в диалоге
-        dialogView.findViewById<TextView>(R.id.fullname_dialog).text = "${entry.name} ${entry.secondName} ${entry.thirdName}"
-        dialogView.findViewById<TextView>(R.id.number_dialog).text = entry.number.toString()
+        dialogView.findViewById<TextView>(R.id.fullname_dialog).text =
+            "${entry.name} ${entry.secondName} ${entry.thirdName}"
+
+        dialogView.findViewById<TextView>(R.id.number_dialog).apply {
+            text = entry.number.toString()
+            //setTextColor(Color.rgb(170, 238, 250))
+            // Обработка нажатия на номер телефона
+            setOnClickListener {
+                val dialIntent = Intent(Intent.ACTION_DIAL).apply {
+                    data = Uri.parse("tel:${entry.number}") // Номер телефона
+                }
+                context.startActivity(dialIntent)
+            }
+        }
         dialogView.findViewById<TextView>(R.id.date_dialog).text = entry.date
         dialogView.findViewById<TextView>(R.id.time_dialog).text = entry.time
         dialogView.findViewById<TextView>(R.id.price_dialog).text = "${entry.price} грн"
@@ -55,3 +70,4 @@ object DialogUtils {
         dialog.show()
     }
 }
+

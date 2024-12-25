@@ -13,25 +13,31 @@ import com.example.timely1.R
 @RequiresApi(Build.VERSION_CODES.O)
 class NotificationHelper(private val context: Context) {
 
-    private val channelId = "reminder_channel"
+    private val channelId = "reminder_channel_4"
     private val channelName = "Reminders"
-    private val notificationId = 1
+    private val notificationId = 2
 
     init {
         createNotificationChannel()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun createNotificationChannel() {
+    private fun createNotificationChannel() {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+
+
         val channel = NotificationChannel(
             channelId,
             channelName,
             NotificationManager.IMPORTANCE_HIGH
         ).apply {
             description = "Channel for reminder notifications"
+            enableVibration(true) // Включаем вибрацию
+            vibrationPattern = longArrayOf(0, 400, 200, 400, 200 , 400) // Новый паттерн вибрации
         }
+
         notificationManager.createNotificationChannel(channel)
     }
 
@@ -53,7 +59,7 @@ class NotificationHelper(private val context: Context) {
             .setContentTitle("Нагадування про запис")
             .setContentText("$name записан(а) на $time")
             .setSmallIcon(R.drawable.check) // Убедитесь, что у вас есть иконка с этим ID
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setPriority(NotificationCompat.PRIORITY_HIGH) // Высокий приоритет
             .setContentIntent(pendingIntent) // Добавляем PendingIntent
             .setAutoCancel(true) // Убираем уведомление после нажатия
             .build()
@@ -61,5 +67,4 @@ class NotificationHelper(private val context: Context) {
         // Показ уведомления
         notificationManager.notify(notificationId, notification)
     }
-
 }

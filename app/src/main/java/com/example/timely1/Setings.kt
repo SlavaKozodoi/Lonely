@@ -104,22 +104,24 @@ class Setings : Fragment() {
     }
 
     private fun applyToAllRecords(hours: Int, minutes: Int) {
-        val newReminderTimeOffsetInMillis = (hours * 60 + minutes) * 60 * 1000
+        val newReminderTimeOffsetInMinutes = hours * 60 + minutes // Смещение в минутах
         val db: DataBase = DataBase(requireContext())
 
         // Получаем все записи из базы данных
         val allEntries = db.getAllEntriesForMes()
         for (entry in allEntries) {
             // Парсим дату и время записи клиента
-            val appointmentTime = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
-                .parse("${entry.date} ${entry.time}")?.time ?: continue
+            val appointmentTimeInMillis = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault())
+                .parse("${entry.date} ${entry.time}")?.time
+
+            if (appointmentTimeInMillis == null) continue // Пропускаем, если не удалось распарсить время
 
             // Вычисляем новое время напоминания
-            val newReminderTime = appointmentTime - newReminderTimeOffsetInMillis
+            val newReminderTimeInMillis = appointmentTimeInMillis - newReminderTimeOffsetInMinutes * 60 * 1000 // Преобразуем минуты в миллисекунды
 
             // Убедимся, что напоминание ставится на будущее
-            if (newReminderTime > System.currentTimeMillis() && switchNotifications.isChecked) {
-                scheduleReminder(requireContext(), entry.name, newReminderTime)
+            if (newReminderTimeInMillis > System.currentTimeMillis() && switchNotifications.isChecked) {
+                scheduleReminder(requireContext(), entry.name, newReminderTimeInMillis, appointmentTimeInMillis)
             }
         }
 
@@ -132,7 +134,8 @@ class Setings : Fragment() {
 
 
     private fun toggleNotifications(isEnabled: Boolean) {
-        val sharedPreferences = requireContext().getSharedPreferences(sharedPrefsName, Context.MODE_PRIVATE)
+        val sharedPreferences =
+            requireContext().getSharedPreferences(sharedPrefsName, Context.MODE_PRIVATE)
         sharedPreferences.edit().putBoolean(switchKey, isEnabled).apply()
 
         if (isEnabled) {
@@ -142,39 +145,34 @@ class Setings : Fragment() {
         }
     }
 
-
-
-
-
-
     @SuppressLint("ScheduleExactAlarm")
-    private fun scheduleReminder(context: Context, name: String, timeInMillis: Long) {
-        val sharedPreferences = context.getSharedPreferences(sharedPrefsName, Context.MODE_PRIVATE)
-
-
+    private fun scheduleReminder(context: Context, name: String, reminderTimeInMillis: Long, appointmentTimeInMillis: Long) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         val intent = Intent(context, ReminderReceiver::class.java).apply {
             putExtra("client_name", name)
             putExtra(
+                "client_reminder_time",
+                SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()).format(reminderTimeInMillis)
+            )
+            putExtra(
                 "client_time",
-                SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()).format(timeInMillis)
+                SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault()).format(appointmentTimeInMillis)
             )
         }
 
         val pendingIntent = PendingIntent.getBroadcast(
             context,
-            timeInMillis.hashCode(),
+            reminderTimeInMillis.hashCode(),
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
         alarmManager.setExactAndAllowWhileIdle(
             AlarmManager.RTC_WAKEUP,
-            timeInMillis,
+            reminderTimeInMillis,
             pendingIntent
         )
     }
-
 
 }
